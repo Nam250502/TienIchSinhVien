@@ -266,7 +266,6 @@
     <Content Include="Areas\Admin\Views\ViecLams\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ViecLams\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_layoutAD.cshtml" />
-    <Content Include="Areas\Admin\Views\PhongTroAD\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\JavaScriptAD.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

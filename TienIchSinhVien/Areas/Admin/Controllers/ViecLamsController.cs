@@ -17,7 +17,7 @@ namespace TienIchSinhVien.Areas.Admin.Controllers
         // GET: Admin/ViecLams
         public ActionResult Index()
         {
-            return View(db.ViecLam.ToList());
+            return View(db.ViecLam.Where(p => p.TrangThai == 0).ToList());
         }
 
         // GET: Admin/ViecLams/Details/5
@@ -122,6 +122,18 @@ namespace TienIchSinhVien.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public void DuyetBai(int id, int value)
+        {
+
+            ViecLam ViecLam = db.ViecLam.Find(id);
+            if (value == 1 || value == 2)
+            {
+                ViecLam.TrangThai = value;
+                db.SaveChanges();
+            }
+
+            return;
         }
     }
 }
