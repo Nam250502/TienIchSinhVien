@@ -1,0 +1,174 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<TienIchSinhVien.Models.PhongTro>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+<link href="~/Content/css/StyleSP.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+
+
+<section id="gallery">
+    <div class="container">
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 mb-4">
+
+
+
+                    <div class="card">
+                        <img src="@item.AnhMinhHoa" alt="" class="card-img-top" height="275">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.TieuDe</h5>
+                            <p class="card-text">@item.Gia</p>
+                            <a href="@Url.Action("Details", "PhongTro", new {id=item.IdPhongTro})" class="btn btn-outline-success btn-sm">Chi Tiết</a>
+                            <a href="" class="btn btn-outline-danger btn-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+            <ul class="pagination_rounded">
+                <li>
+                    <a href="#" class="prev">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                        </svg> Prev
+                    </a>
+                </li>
+                <li>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+                </li>
+
+                <li>
+                    <a href="#" class="next">
+                        Next <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+
+    .pagination_rounded, .pagination_square {
+        display: inline-block;
+        margin-left: 400px;
+        margin-top: 300px;
+    }
+
+    .pagination_rounded {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        .pagination_rounded li:first-child {
+            margin-left: 0px;
+        }
+
+        .pagination_rounded li {
+            float: left;
+            margin-left: 20px;
+        }
+
+            .pagination_rounded li a:hover {
+                background: #4285f4;
+                color: #fff;
+                border: 1px solid #4285f4;
+            }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    .pagination_rounded .prev {
+        margin-left: 0px;
+        border-radius: 35px;
+        width: 90px;
+        height: 34px;
+        line-height: 34px;
+    }
+
+
+    .pagination_rounded li a {
+        float: left;
+        color: #4285f4;
+        border-radius: 50%;
+        line-height: 30px;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        margin-bottom: 40px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .pagination_rounded .prev i {
+        margin-right: 10px;
+    }
+
+    .pagination_rounded .next {
+        border-radius: 35px;
+        width: 90px;
+        height: 34px;
+        line-height: 34px;
+    }
+
+    .visible-xs {
+        display: none !important;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var maxLength = 100;
+        $(".show-read-more").each(function () {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+                $(this).append(' <a href="javascript:void(0);" class="read-more">đọctiếp...</a > ');
+                $(this).append('<span class="more-text">' + removedStr + '</span>');
+            }
+        });
+        $(".read-more").click(function () {
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+    });
+</script>
+<style>
+    body {
+        background-color: #e2e8f0;
+    }
+</style>
+<script src="~/Scripts/bootstrap.bundle.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.slim.min.js"></script>
+
+
+
+
+
+
+
+

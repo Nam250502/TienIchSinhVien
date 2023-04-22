@@ -1,0 +1,234 @@
+﻿@model TienIchSinhVien.Models.ViecLam
+
+    @{
+        ViewBag.Title = "Details";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    @*<h2>Details</h2>
+
+    <div>
+        <h4>ViecLam</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.IdUser)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IdUser)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TieuDe)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TieuDe)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AnhMinhHoa)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AnhMinhHoa)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Luong)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Luong)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NgayDang)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgayDang)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ViTriUngTuyen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ViTriUngTuyen)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TrangThai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TinhTrang)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.IdViecLam }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+
+
+    @model TienIchSinhVien.Models.ViecLam
+
+    @{
+        ViewBag.Title = "Details";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+
+    <div>
+        <h4>Thông Tin Việc Làm</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+
+            <dd>
+                <img src="@Html.DisplayFor(model => model.AnhMinhHoa)" />
+            </dd>
+            <dt>
+                <h5>Địa Chỉ</h5>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+            <dt>
+                <h5>Ngày Đăng</h5>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgayDang)
+            </dd>
+
+            <dt>
+                <h5>Vị Trí Tuyển Dụng</h5>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ViTriUngTuyen)
+            </dd>
+
+            <dt>
+                <h5>Mô Tả Công Việc</h5>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+
+            <dt>
+                <h5>Lương</h5>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Luong)
+            </dd>
+            <dt>
+                <h5>SDT</h5>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+
+
+        </dl>
+    </div>
+    <p>
+
+        @Html.ActionLink("Quay Lại", "Index")
+
+    </p>*@
+
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Product Detail Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="@Model.AnhMinhHoa" alt="Product Image" class="img-fluid" height="350px">
+            </div>
+            <div class="col-md-8">
+                <h1>@Model.TieuDe</h1>
+                <p>@Model.MoTa</p>
+                <p>Địa Chỉ: @Model.DiaChi</p>
+                <p> Vị Trí Cần Tuyể: @Model.ViTriUngTuyen</p>
+                <p> Ngày Đăng: @Model.NgayDang</p>
+                <h3> Lương: @Model.Luong</h3>
+                <button class="btn btn-outline-success" onclick="copyToClipboard()">Sao Chép Số Điện Thoại</button>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg>    <a href="@Url.Action("Index","Vieclam")">Quay Lại</a>
+    </div>
+
+
+    <script>
+   function copyToClipboard() {
+         var phoneNumber = "@Html.DisplayFor(model => model.PhoneNumber)";
+         var productData = phoneNumber;
+
+             navigator.clipboard.writeText(productData).then(function() {
+                 console.log("Copied phone number to clipboard: " + phoneNumber);
+                 alert("Đã sao chép: " + productData);
+                     }, function() {
+                 console.error("Unable to copy phone number to clipboard.");
+                 alert("Sao chép không thành công. Vui lòng thử lại.");
+                     });
+            }
+
+    </script>
+</body>
+</html>

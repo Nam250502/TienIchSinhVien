@@ -1,0 +1,59 @@
+﻿@model TienIchSinhVien.Models.PhongTro
+
+    @{
+        ViewBag.Title = "Details";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Product Detail Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="@Model.AnhMinhHoa" alt="Product Image" class="img-fluid" height="350px">
+            </div>
+            <div class="col-md-8">
+                <h1>@Model.TieuDe</h1>
+                <p>@Model.MoTa</p>
+                <p>Địa Chỉ: @Model.DiaChi</p>
+                <p> Diện Tích: @Model.DienTich</p>
+                <p> Ngày Đăng: @Model.NgayDang</p>
+                <h3> Giá Thuê: @Model.Gia</h3>
+                <button class="btn btn-outline-success" onclick="copyToClipboard()">Sao Chép Số Điện Thoại</button>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg>    <a href="@Url.Action("Index","PhongTro")">Quay Lại</a>
+    </div>
+
+  
+    <script>
+   function copyToClipboard() {
+         var phoneNumber = "@Html.DisplayFor(model => model.PhoneNumber)";
+         var productData = phoneNumber;
+
+             navigator.clipboard.writeText(productData).then(function() {
+                 console.log("Copied phone number to clipboard: " + phoneNumber);
+                 alert("Đã sao chép: " + productData);
+                     }, function() {
+                 console.error("Unable to copy phone number to clipboard.");
+                 alert("Sao chép không thành công. Vui lòng thử lại.");
+                     });
+            }
+
+    </script>
+</body>
+</html>

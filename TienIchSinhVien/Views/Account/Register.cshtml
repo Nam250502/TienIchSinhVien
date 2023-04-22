@@ -1,0 +1,77 @@
+﻿@model TienIchSinhVien.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Đăng Kí";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Kodinger">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/my-login.css">
+</head>
+<body class="my-login-page">
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-md-center h-100">
+                <div class="card-wrapper">
+                    <div class="brand">
+                        <img src="~/Content/img/logo.jpg" alt="bootstrap 4 login page">
+                    </div>
+                    <div class="card fat">
+                        <div class="card-body">
+                            <h4 class="card-title">Đăng Kí</h4>
+
+                            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    <div class="invalid-feedback">
+                                        Your email is invalid
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Mật Khẩu</label>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    <div class="invalid-feedback">
+                                        Password is required
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Xác Nhân Mật Khẩu</label>
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                    <div class="invalid-feedback">
+                                        Password is required
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-0">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        Đăng Kí
+                                    </button>
+                                </div>
+
+                                <div class="mt-4 text-center">
+                                    Bạn Đã Có Tài Khoản? <a href="@Url.Action("Login", "Account")">Đăng Nhập</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="~/Scripts/my-login.js"></script>
+</body>
+</html>
+

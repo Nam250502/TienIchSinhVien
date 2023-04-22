@@ -1,0 +1,161 @@
+﻿@model IEnumerable<TienIchSinhVien.Models.PhongTro>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAD.cshtml";
+}
+
+@*
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TieuDe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnhMinhHoa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayDang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DienTich)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TieuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnhMinhHoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DienTich)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrangThai)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.IdPhongTro }) |
+                @Html.ActionLink("Details", "Details", new { id=item.IdPhongTro }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.IdPhongTro })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Phòng Đã Dăng</title>
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <style>
+        .my-btn {
+            border-color: #4e8bef;
+            background-color: white;
+            color: black;
+        }
+
+            .my-btn:hover {
+                background-color: #4e8bef;
+            }
+
+            .my-btn .active {
+                background-color: #4e8bef;
+            }
+    </style>
+</head>
+<body>
+    <br />
+    <br />
+    <br />
+    <br />
+    @foreach (var item in Model)
+    {
+        <!-- Sản phẩm 1 -->
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="@item.AnhMinhHoa" alt="Product Image" class="img-fluid" width="150px" height="50px">
+                </div>
+                <div class="col-md-5">
+                    <h5>@item.TieuDe</h5>
+                    <p>@item.MoTa</p>
+                    <p>@item.NgayDang</p>
+
+                </div>
+
+                <div class="col-md-2">
+                    <p></p>
+                    @*<button type="button" class="btn btn-outline-primary btn-block mb-2" onclick="location.href='@Url.Action("DuyetBai", "PhongTroAD", new { id=item.IdPhongTro,value=1 })'">Duyệt</button>
+        <button type="button" class="btn btn-outline-danger btn-block mb-2" onclick="location.href='@Url.Action("DuyetBai", "PhongTroAD", new { id=item.IdPhongTro,value=2 })'">Từ Chối</button>*@
+
+                    <button type="button" class="btn btn-outline-primary btn-block mb-2" onclick="submitForm(1)">Duyệt</button>
+                    <button type="button" class="btn btn-outline-danger btn-block mb-2" onclick="submitForm(2)">Từ Chối</button>
+                    <script>
+                     function submitForm(value) {
+                        fetch('@Url.Action("DuyetBai", "PhongTroAD")', {
+                             method: 'POST',
+                                body: JSON.stringify({ id: @item.IdPhongTro, value: value }),
+                                headers: {
+                                        'Content-Type': 'application/json'
+                                }
+                        })
+                        .then(() => {
+                                location.reload();
+                         });
+    }
+                    </script>
+
+
+
+                </div>
+            </div>
+        </li>
+    }
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>
+
+        
