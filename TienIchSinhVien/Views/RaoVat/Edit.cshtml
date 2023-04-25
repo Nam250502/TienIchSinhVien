@@ -1,4 +1,4 @@
-﻿@model TienIchSinhVien.Models.ViecLam
+﻿@model TienIchSinhVien.Models.RaoVat
 
 @{
     ViewBag.Title = "Edit";
@@ -7,18 +7,17 @@
 
 
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>ViecLam</h4>
+        <h4>Chỉnh Sửa Bài Viết</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IdViecLam)
+        @Html.HiddenFor(model => model.IdBaiRao)
 
-      
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.TieuDe, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -37,10 +36,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Luong, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Gia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Luong, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Luong, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -51,17 +50,6 @@
                 @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
             </div>
         </div>
-
-       
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ViTriUngTuyen, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ViTriUngTuyen, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ViTriUngTuyen, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -70,8 +58,7 @@
             </div>
         </div>
 
-       
-       
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

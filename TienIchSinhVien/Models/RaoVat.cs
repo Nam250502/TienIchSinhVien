@@ -6,11 +6,11 @@ namespace TienIchSinhVien.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ViecLam")]
-    public partial class ViecLam
+    [Table("RaoVat")]
+    public partial class RaoVat
     {
         [Key]
-        public int IdViecLam { get; set; }
+        public int IdBaiRao { get; set; }
 
         [StringLength(256)]
         public string IdUser { get; set; }
@@ -22,7 +22,7 @@ namespace TienIchSinhVien.Models
         public string AnhMinhHoa { get; set; }
 
         [StringLength(255)]
-        public string Luong { get; set; }
+        public string Gia { get; set; }
 
         [StringLength(255)]
         public string DiaChi { get; set; }
@@ -30,13 +30,15 @@ namespace TienIchSinhVien.Models
         [Column(TypeName = "date")]
         public DateTime? NgayDang { get; set; }
 
-        [StringLength(50)]
-        public string ViTriUngTuyen { get; set; }
-
         public string MoTa { get; set; }
 
         public int? TrangThai { get; set; }
 
         public string PhoneNumber { get; set; }
+
+        public int? LoaiHang { get; set; }
+        public List<LoaiHang> loaiHangs = new List<LoaiHang>();
+
+        public virtual LoaiHang LoaiHang1 { get; set; }
     }
 }

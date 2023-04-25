@@ -42,15 +42,11 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li >@Html.ActionLink("Thành Viên", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Thành Viên", "Index", "Home")</li>
                             <li>@Html.ActionLink("Tìm Phòng Trọ", "Index", "PhongTro")</li>
+                            <li>@Html.ActionLink("Tìm Việc Làm", "Index", "ViecLam")</li>
 
-                            <li>
-
-                                <a href="@Url.Action("Index","ViecLam")">Tìm Việc Làm</a>
-                             
-                            </li>
-
+                            <li>@Html.ActionLink("Rao Vặt", "Index", "RaoVat")</li>
 
                         </ul>
                     </nav>

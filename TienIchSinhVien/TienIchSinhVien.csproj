@@ -185,21 +185,25 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\PhongTroADController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RaoVatADController.cs" />
     <Compile Include="Areas\Admin\Controllers\ViecLamsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhongTroController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\RaoVatController.cs" />
     <Compile Include="Controllers\ViecLamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LoaiHang.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PhongTro.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />
+    <Compile Include="Models\RaoVat.cs" />
     <Compile Include="Models\TienIchSinhVienDb.cs" />
     <Compile Include="Models\ViecLam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -266,6 +270,11 @@
     <Content Include="Areas\Admin\Views\ViecLams\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ViecLams\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_layoutAD.cshtml" />
+    <Content Include="Areas\Admin\Views\RaoVatAD\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\RaoVatAD\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\RaoVatAD\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\RaoVatAD\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\RaoVatAD\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\JavaScriptAD.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -326,6 +335,12 @@
     <Content Include="Views\PhongTro\Delete.cshtml" />
     <Content Include="Views\ViecLam\Delete.cshtml" />
     <Content Include="Views\Profile\VLDaDang.cshtml" />
+    <Content Include="Views\RaoVat\Create.cshtml" />
+    <Content Include="Views\RaoVat\Delete.cshtml" />
+    <Content Include="Views\RaoVat\Details.cshtml" />
+    <Content Include="Views\RaoVat\Edit.cshtml" />
+    <Content Include="Views\RaoVat\Index.cshtml" />
+    <Content Include="Views\Profile\RaoVat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

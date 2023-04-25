@@ -34,9 +34,15 @@
     <br />
     <br />
     <br />
-    <button>
-        <a href="@Url.Action("Index","ViecLams")" target="_blank">Đi tới trang web</a>
-    </button>
+    <div class="row">
+        <button>
+            <a href="@Url.Action("Index","ViecLams")" target="_blank">Duyệt Đăng Bài Việc làm</a>
+        </button>
+        <button>
+            <a href="@Url.Action("Index","RaoVatAD")" target="_blank">Duyệt Đăng Bài Thanh Lí</a>
+        </button>
+    </div>
+    
 
     @foreach (var item in Model)
     {

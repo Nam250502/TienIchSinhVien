@@ -16,13 +16,7 @@ namespace TienIchSinhVien.Controllers
 {
     public class PhongTroController : Controller
     {
-    //    private TienIchSinhVienDb db = new TienIchSinhVienDb();
-
-    //    GET: PhongTro
-    //    public ActionResult Index()
-    //    {
-    //        return View(db.PhongTro.ToList());
-    //    }
+   
     private ApplicationUserManager _userManager;
     TienIchSinhVienDb db = new TienIchSinhVienDb();
 

@@ -129,5 +129,12 @@ namespace TienIchSinhVien.Controllers
 
             return View(VLdadang);
         }
+        public ActionResult RaoVat()
+        {
+            var userId = User.Identity.GetUserId();
+            var VLdadang = db.RaoVat.Where(p => p.IdUser == userId);
+
+            return View(VLdadang);
+        }
     }
 }

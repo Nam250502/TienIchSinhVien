@@ -1,8 +1,11 @@
-﻿@model IEnumerable<TienIchSinhVien.Models.ViecLam>
+﻿@model IEnumerable<TienIchSinhVien.Models.RaoVat>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAD.cshtml";
 }
+
+
+
 <!DOCTYPE html>
 
 <html>
@@ -33,12 +36,14 @@
     <br />
     <div class="row">
         <button>
-            <a href="@Url.Action("Index","RaoVatAD")" target="_blank">Duyệt Thanh Lí</a>
+            <a href="@Url.Action("Index","ViecLams")" target="_blank">Duyệt Đăng Bài Việc làm</a>
         </button>
         <button>
             <a href="@Url.Action("Index","PhongTroAD")" target="_blank">Duyệt Đăng Bài Phòng Trọ</a>
         </button>
     </div>
+   
+
     @foreach (var item in Model)
     {
         <!-- Sản phẩm 1 -->
@@ -56,23 +61,21 @@
 
                 <div class="col-md-2">
                     <p></p>
-                    @*<button type="button" class="btn btn-outline-primary btn-block mb-2" onclick="location.href='@Url.Action("DuyetBai", "PhongTroAD", new { id=item.IdPhongTro,value=1 })'">Duyệt</button>
-                        <button type="button" class="btn btn-outline-danger btn-block mb-2" onclick="location.href='@Url.Action("DuyetBai", "PhongTroAD", new { id=item.IdPhongTro,value=2 })'">Từ Chối</button>*@
 
                     <button type="button" class="btn btn-outline-primary btn-block mb-2" onclick="submitForm(1)">Duyệt</button>
                     <button type="button" class="btn btn-outline-danger btn-block mb-2" onclick="submitForm(2)">Từ Chối</button>
                     <script>
                      function submitForm(value) {
-                        fetch('@Url.Action("DuyetBai", "ViecLams")', {
+                         fetch('@Url.Action("DuyetBai", "RaoVatAD")', {
                              method: 'POST',
-                                body: JSON.stringify({ id: @item.IdViecLam, value: value }),
-                                headers: {
-                                        'Content-Type': 'application/json'
-                                }
-                        })
-                        .then(() => {
-                                location.reload();
-                         });
+                             body: JSON.stringify({ id: @item.IdBaiRao, value: value }),
+                             headers: {
+                                 'Content-Type': 'application/json'
+                             }
+                         })
+                             .then(() => {
+                                 location.reload()
+                             })
     }
                     </script>
 

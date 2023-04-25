@@ -24,23 +24,8 @@
 <body>
 
     <div class="container mt-4">
-        <h5 class="float-le mb-4">Tin Phòng Trọ Đã Dăng</h5>
-        @*<div class="button-container">
+        <h5 class="float-le mb-4">Tin Việc làm Đã Dăng</h5>
 
-                <button type="button" class="btn btn-secondary my-btn " onclick="location.href='@Url.Action("PTDaDang", "Profile")'">Tin Phòng Trọ</button>
-                <button style=" background-color: #4e8bef" type="button" class="btn btn-secondary my-btn " onclick="location.href='@Url.Action("VLdadang", "Profile")'">Tin Việc Làm</button>
-
-
-                <button class="btn btn-secondary my-btn dropdown-toggle" type="button" data-toggle="dropdown">
-                    Đăng bài
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="@Url.Action("Create", "PhongTro")">Đăng phòng trọ</a>
-                    <a class="dropdown-item" href="@Url.Action("Create", "ViecLam")">Đăng việc làm</a>
-                </div>
-
-
-            </div>*@
 
         <ul class="list-group">
             @foreach (var item in Model)
@@ -103,26 +88,14 @@
                             <p></p>
                             <button type="button" class="btn btn-outline-primary btn-block mb-2" onclick="location.href='@Url.Action("Edit", "ViecLam", new { id=item.IdViecLam })'">Edit</button>
 
-                            @using (Html.BeginForm("Delete", "PhongTro", new { id = item.IdViecLam }, FormMethod.Post, new { id = "delete-form" }))
+                            @using (Html.BeginForm("Delete", "ViecLam", new { id = item.IdViecLam }, FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()
                                 <input type="submit" value="Delete" class="btn btn-outline-danger btn-block" />
                             }
 
                             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                            <script>
-                                $(function () {
-                                    $("#delete-form").submit(function (e) {
-                                        e.preventDefault();
-                                        if (confirm("Bạn có Chắc Xóa Tin Đăng?")) {
-                                            $.post($(this).attr("action"), $(this).serialize(), function () {
-                                                location.reload();
-                                            });
-                                        }
-                                    });
-                                });
-                            </script>
-
+                            
 
                         </div>
                     </div>

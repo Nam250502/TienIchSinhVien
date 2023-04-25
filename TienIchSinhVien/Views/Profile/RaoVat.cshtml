@@ -1,7 +1,7 @@
-﻿@model IEnumerable<TienIchSinhVien.Models.PhongTro>
+﻿@model IEnumerable<TienIchSinhVien.Models.RaoVat>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout =null;
 }
 <!DOCTYPE html>
 
@@ -13,12 +13,13 @@
         .my-btn {
             border-color: #4e8bef;
             background-color: white;
-            color:black;
+            color: black;
         }
 
             .my-btn:hover {
                 background-color: #4e8bef;
             }
+
             .my-btn .active {
                 background-color: #4e8bef;
             }
@@ -27,21 +28,7 @@
 <body>
 
     <div class="container mt-4">
-        <h5 class="float-le mb-4">Tin Phòng Trọ Đã Dăng</h5>
-        <div class="button-container">
-            <button class="btn btn-primary my-btn active">Tin Đã Đăng</button>
-            <button class="btn btn-secondary my-btn dropdown-toggle" type="button" data-toggle="dropdown">
-                Đăng bài
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="@Url.Action("Create", "PhongTro")">Đăng phòng trọ</a>
-                <a class="dropdown-item" href="@Url.Action("Create", "ViecLam")">Đăng việc làm</a>
-                <a class="dropdown-item" href="@Url.Action("Create", "RaoVat")">Thanh Lí</a>
-            </div>
-
-
-        </div>
-
+        <h5 class="float-le mb-4">Rao Vặt</h5>
         <ul class="list-group">
             @foreach (var item in Model)
             {
@@ -100,16 +87,16 @@
                                 </p>
                             </div>
                         }
-                        <div class="col-md-2">
-                            <p></p>
-                            <button type="button" class="btn btn-outline-primary btn-block mb-2" onclick="location.href='@Url.Action("Edit", "PhongTro", new { id=item.IdPhongTro })'">Edit</button>
+                    <div class="col-md-2">
+                        <p></p>
+                        <button type="button" class="btn btn-outline-primary btn-block mb-2" onclick="location.href='@Url.Action("Edit", "RaoVatAD", new { id=item.IdBaiRao })'">Edit</button>
 
-                            @using (Html.BeginForm("Delete", "PhongTro", new { id = item.IdPhongTro }, FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                <input onclick="location.reload();" type="submit" value="Delete" class="btn btn-outline-danger btn-block" />
-                            }
-                        </div>
+                        @using (Html.BeginForm("Delete", "RaoVat", new { id = item.IdBaiRao }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input onclick="location.reload()" type="submit" value="Delete" class="btn btn-outline-danger btn-block" />
+                        }
+                    </div>
                     </div>
                 </li>
             }
@@ -117,8 +104,7 @@
         </ul>
     </div>
     @*gọi view của việc làm đăng*@
-    @Html.Action("VLDaDang", "Profile")
-    @Html.Action("RaoVat", "Profile")
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
