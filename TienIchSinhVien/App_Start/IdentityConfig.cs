@@ -105,5 +105,7 @@ namespace TienIchSinhVien
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
+       
+
     }
 }
