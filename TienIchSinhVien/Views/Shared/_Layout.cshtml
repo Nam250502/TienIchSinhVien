@@ -34,12 +34,8 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-3">
-                    <div class="header__logo">
-                        @Html.Partial("_LoginPartial")
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
+
+                <div class="col-lg-9 col-md-9">
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li>@Html.ActionLink("Thành Viên", "Index", "Home")</li>
@@ -51,17 +47,10 @@
                         </ul>
                     </nav>
                 </div>
-
                 <div class="col-lg-3 col-md-3">
-                    <div class="header__nav__option">
-                      
-                       
-
-                    </div>
-
-                    </div>
-                <div class="col-lg-1 col-md-auto">
-                    <div style="grid-auto-rows; align-self"></div>
+                   <br />
+                        @Html.Partial("_LoginPartial")
+                  
                 </div>
             </div>
             <div class="canvas__open"><i class="fa fa-bars"></i></div>

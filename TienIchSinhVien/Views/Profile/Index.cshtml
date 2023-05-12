@@ -65,7 +65,7 @@
     </style>
 </head>
 <body>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <div class="container">
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
                     <div class="col-md-8">
                         <div class="card mb-3">
                             <div class="card-body">
@@ -109,7 +109,7 @@
                                     <div class="col-sm-9 text-secondary">
 
                                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                                        @Html.TextBoxFor(m => m.UserName, new { @class = "aa" })
+
 
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@
                                     <div class="col-sm-9 text-secondary">
 
                                         @Html.TextBoxFor(m => m.Anh, new { @class = "form-control" })
-                                      
+
 
                                     </div>
                                 </div>
@@ -167,11 +167,11 @@
         </script>
     }
     <style>
-        .aa{
-            display:none
+        .aa {
+            display: none
         }
     </style>
-    </body>
+</body>
 </html>
 
 

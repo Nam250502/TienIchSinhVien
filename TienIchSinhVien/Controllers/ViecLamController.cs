@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -51,11 +52,19 @@ namespace TienIchSinhVien.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ViecLam viecLam = db.ViecLam.Find(id);
+
+            var user = UserManager.FindById(viecLam.IdUser);
+            Detailvieclamviewmodel detail = new Detailvieclamviewmodel();
+            detail.ViecLam = viecLam;
+            detail.Anh = user.Anh;
+            detail.Name = user.Name;
+            detail.UserId = viecLam.IdUser;
+
             if (viecLam == null)
             {
                 return HttpNotFound();
             }
-            return View(viecLam);
+            return View(detail);
         }
 
         // GET: ViecLam/Create
@@ -69,10 +78,20 @@ namespace TienIchSinhVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdViecLam,IdUser,TieuDe,AnhMinhHoa,Luong,DiaChi,NgayDang,ViTriUngTuyen,MoTa,TrangThai")] ViecLam viecLam)
+        [Authorize]
+        public ActionResult Create([Bind(Include = "IdViecLam,TieuDe,AnhMinhHoa,Luong,DiaChi,NgayDang,ViTriUngTuyen,MoTa,TrangThai")] ViecLam viecLam, HttpPostedFileBase anh)
         {
             if (ModelState.IsValid)
             {
+                if (anh != null && anh.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(anh.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                    anh.SaveAs(path);
+
+                    viecLam.AnhMinhHoa = "/Content/Images/" + fileName;
+                }
+
                 viecLam.IdUser = User.Identity.GetUserId();
                 DateTime now = DateTime.Now;
                 viecLam.NgayDang = now;

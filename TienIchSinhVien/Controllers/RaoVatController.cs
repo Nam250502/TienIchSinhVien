@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -43,16 +44,35 @@ namespace TienIchSinhVien.Controllers
         }
         public ActionResult Details(int? id)
         {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //RaoVat raoVat = db.RaoVat.Find(id);
+            //if (raoVat == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(raoVat);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RaoVat raoVat = db.RaoVat.Find(id);
-            if (raoVat == null)
+            RaoVat raovat = db.RaoVat.Find(id);
+
+            var user = UserManager.FindById(raovat.IdUser);
+            Detailraovatviewmodel detail = new Detailraovatviewmodel();
+            detail.RaoVat = raovat;
+            detail.Anh = user.Anh;
+            detail.Name = user.Name;
+            detail.UserId = raovat.IdUser;
+
+            if (raovat == null)
             {
                 return HttpNotFound();
             }
-            return View(raoVat);
+            return View(detail);
         }
 
         // GET: RaoVat/Create
@@ -67,12 +87,22 @@ namespace TienIchSinhVien.Controllers
         // POST: RaoVat/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdBaiRao,IdUser,TieuDe,AnhMinhHoa,Gia,DiaChi,NgayDang,MoTa,TrangThai,PhoneNumber,LoaiHang")] RaoVat raoVat)
+        public ActionResult Create([Bind(Include = "IdBaiRao,TieuDe,AnhMinhHoa,Gia,DiaChi,NgayDang,MoTa,TrangThai,PhoneNumber,LoaiHang")] RaoVat raoVat, HttpPostedFileBase anh)
         {
             if (ModelState.IsValid)
             {
+                if (anh != null && anh.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(anh.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                    anh.SaveAs(path);
+
+                    raoVat.AnhMinhHoa = "/Content/Images/" + fileName;
+                }
+
                 DateTime now = DateTime.Now;
 
                 raoVat.NgayDang = now;
@@ -164,5 +194,6 @@ namespace TienIchSinhVien.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

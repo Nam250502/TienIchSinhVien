@@ -1,178 +1,10 @@
-﻿@model TienIchSinhVien.Models.ViecLam
+﻿@model TienIchSinhVien.Models.Detailvieclamviewmodel
 
     @{
         ViewBag.Title = "Details";
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 
-    @*<h2>Details</h2>
-
-    <div>
-        <h4>ViecLam</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.IdUser)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.IdUser)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TieuDe)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TieuDe)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.AnhMinhHoa)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AnhMinhHoa)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Luong)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Luong)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.DiaChi)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.DiaChi)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.NgayDang)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.NgayDang)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ViTriUngTuyen)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ViTriUngTuyen)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.MoTa)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.MoTa)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TrangThai)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TrangThai)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TinhTrang)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TinhTrang)
-            </dd>
-
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.IdViecLam }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-
-
-
-    @model TienIchSinhVien.Models.ViecLam
-
-    @{
-        ViewBag.Title = "Details";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-
-
-
-    <div>
-        <h4>Thông Tin Việc Làm</h4>
-        <hr />
-        <dl class="dl-horizontal">
-
-
-            <dd>
-                <img src="@Html.DisplayFor(model => model.AnhMinhHoa)" />
-            </dd>
-            <dt>
-                <h5>Địa Chỉ</h5>
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.DiaChi)
-            </dd>
-
-            <dt>
-                <h5>Ngày Đăng</h5>
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.NgayDang)
-            </dd>
-
-            <dt>
-                <h5>Vị Trí Tuyển Dụng</h5>
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ViTriUngTuyen)
-            </dd>
-
-            <dt>
-                <h5>Mô Tả Công Việc</h5>
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.MoTa)
-            </dd>
-
-            <dt>
-                <h5>Lương</h5>
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Luong)
-            </dd>
-            <dt>
-                <h5>SDT</h5>
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PhoneNumber)
-            </dd>
-
-
-        </dl>
-    </div>
-    <p>
-
-        @Html.ActionLink("Quay Lại", "Index")
-
-    </p>*@
 
 
 @{
@@ -191,33 +23,74 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="col-lg-12">
         <div class="row">
-            <div class="col-md-4">
-                <img src="@Model.AnhMinhHoa" alt="Product Image" class="img-fluid" height="350px">
-            </div>
+     
             <div class="col-md-8">
-                <h1>@Model.TieuDe</h1>
-                <p>@Model.MoTa</p>
-                <p>Địa Chỉ: @Model.DiaChi</p>
-                <p> Vị Trí Cần Tuyể: @Model.ViTriUngTuyen</p>
-                <p> Ngày Đăng: @Model.NgayDang</p>
-                <h3> Lương: @Model.Luong</h3>
+ 
+                    <img src="@Model.ViecLam.AnhMinhHoa" alt="Product Image" class="d-block mx-auto" style="width: 70%;">
+                <h1>@Model.ViecLam.TieuDe</h1>
+                <p>@Model.ViecLam.MoTa</p>
+                <p>Địa Chỉ: @Model.ViecLam.DiaChi</p>
+                <p> Vị Trí Cần Tuyể: @Model.ViecLam.ViTriUngTuyen</p>
+                <p> Ngày Đăng: @Model.ViecLam.NgayDang</p>
+                <h3> Lương: @Model.ViecLam.Luong</h3>
                 <button class="btn btn-outline-success" onclick="copyToClipboard()">Sao Chép Số Điện Thoại</button>
 
             </div>
-        </div>
-    </div>
-    <div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-        </svg>    <a href="@Url.Action("Index","Vieclam")">Quay Lại</a>
-    </div>
+            <div class="col-lg-4">
+                <div class="container d-flex justify-content-center">
+                    <div class="card p-3 py-4">
+                        <div class="text-center">
+                            <img src="@Model.Anh" width="100" class="rounded-circle">
+                            <h3 class="mt-2">@Model.Name</h3>
+                            <div class="row mt-3 mb-3">
+
+                                <div class="col-md-4">
+                                    <h5>Projects</h5>
+                                    <span class="num">10</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Projects</h5>
+                                    <span class="num">10</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Projects</h5>
+                                    <span class="num">10</span>
+                                </div>
+
+                            </div>
 
 
-    <script>
+                            @using (Html.BeginForm("detaiprofile", "PhongTro", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input name="id" value="@Model.UserId" style="display:none" />
+
+                                <div class="profile mt-5">
+
+                                    <button type="submit" class="profile_button px-5">View profile</button>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+
+                </div>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>    <a href="@Url.Action("Index","Vieclam")">Quay Lại</a>
+            </div>
+
+
+            <script>
    function copyToClipboard() {
-         var phoneNumber = "@Html.DisplayFor(model => model.PhoneNumber)";
+         var phoneNumber = "@Html.DisplayFor(model => model.ViecLam.PhoneNumber)";
          var productData = phoneNumber;
 
              navigator.clipboard.writeText(productData).then(function() {
@@ -229,6 +102,6 @@
                      });
             }
 
-    </script>
+            </script>
 </body>
 </html>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -53,15 +54,23 @@ namespace TienIchSinhVien.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PhongTro phongTro = db.PhongTro.Find(id);
-            
+           
+            var user = UserManager.FindById(phongTro.IdUser);
+            Detailphongtroviewmodel detail = new Detailphongtroviewmodel();
+            detail.PhongTro = phongTro;
+            detail.Anh=user.Anh;
+            detail.Name = user.Name;
+            detail.UserId = phongTro.IdUser;
+
             if (phongTro == null)
             {
                 return HttpNotFound();
             }
-            return View(phongTro);
+            return View(detail);
         }
 
         // GET: PhongTro/Create
+        [Authorize]
         public ActionResult Create()
         {
             
@@ -71,16 +80,26 @@ namespace TienIchSinhVien.Controllers
         // POST: PhongTro/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdPhongTro,IdUser,TieuDe,AnhMinhHoa,Gia,DiaChi,DienTich,MoTa,TrangThai")] PhongTro phongTro)
+        public ActionResult Create([Bind(Include = "IdPhongTro,TieuDe,Gia,DiaChi,DienTich,MoTa")] PhongTro phongTro, HttpPostedFileBase anh)
         {
             if (ModelState.IsValid)
             {
-                DateTime now = DateTime.Now;
+                if (anh != null && anh.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(anh.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                    anh.SaveAs(path);
 
-                phongTro.NgayDang = now;
+                    phongTro.AnhMinhHoa = "/Content/Images/" + fileName;
+                }
+
+                DateTime now = DateTime.Now;
                 phongTro.IdUser = User.Identity.GetUserId();
+                phongTro.NgayDang = now;
                 phongTro.TrangThai = 0;
                 var user = UserManager.FindById(phongTro.IdUser);
                 phongTro.PhoneNumber = user.PhoneNumber;
@@ -92,8 +111,6 @@ namespace TienIchSinhVien.Controllers
 
             return View(phongTro);
         }
-
-        // GET: PhongTro/Edit/5
         public ActionResult Edit(int id)
         {
             if (id == null)
@@ -164,6 +181,24 @@ namespace TienIchSinhVien.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult detaiprofile(string id)
+        {
+
+            
+            var user = UserManager.FindById(id);
+            var model = new ProfileViewModel
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Name = user.Name,
+                Anh = user.Anh,
+
+            };
+
+
+            return View(model);
         }
     }
 }

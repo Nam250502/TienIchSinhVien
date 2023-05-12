@@ -87,21 +87,21 @@ namespace TienIchSinhVien.Controllers
             }
             return View(model);
         }
-        public async Task<ActionResult> Edit(string id, string email, string phoneNumber, string Name,string UserName,string Anh)
+        public async Task<ActionResult> Edit(ProfileViewModel model)
         {
-            var userId = User.Identity.GetUserId();
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user != null)
             {
                 // Cập nhật các thông tin mới của người dùng
-                user.Email = email;
-                user.PhoneNumber = phoneNumber;
-                user.UserName=UserName;
-                user.Name = Name;
-                user.Anh = Anh;
+                user.Email = model.Email;
+                user.PhoneNumber = model.PhoneNumber;
 
-                var result = await _userManager.UpdateAsync(user);
+                user.Name =model.Name;
+                user.Anh = model.Anh;
+
+                var result = await UserManager.UpdateAsync(user);
+
 
                 if (result.Succeeded)
                 {
