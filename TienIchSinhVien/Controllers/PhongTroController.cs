@@ -17,32 +17,32 @@ namespace TienIchSinhVien.Controllers
 {
     public class PhongTroController : Controller
     {
-   
-    private ApplicationUserManager _userManager;
-    TienIchSinhVienDb db = new TienIchSinhVienDb();
+
+        private ApplicationUserManager _userManager;
+        TienIchSinhVienDb db = new TienIchSinhVienDb();
 
 
 
-    public ApplicationUserManager UserManager
-    {
-        get
+        public ApplicationUserManager UserManager
         {
-            return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            set
+            {
+                _userManager = value;
+            }
         }
-        set
-        {
-            _userManager = value;
-        }
-    }
 
 
-    public ActionResult Index(int? page)
+        public ActionResult Index(int? page)
         {
 
             if (page == null) page = 1;
             int pageSize = 12;
             var phongTro = db.PhongTro;
-            return View(phongTro.Where(p=>p.TrangThai==1).ToList().ToPagedList(page.Value, pageSize));
+            return View(phongTro.Where(p => p.TrangThai == 1).ToList().ToPagedList(page.Value, pageSize));
         }
 
         // GET: PhongTro/Details/5
@@ -54,11 +54,11 @@ namespace TienIchSinhVien.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PhongTro phongTro = db.PhongTro.Find(id);
-           
+
             var user = UserManager.FindById(phongTro.IdUser);
             Detailphongtroviewmodel detail = new Detailphongtroviewmodel();
             detail.PhongTro = phongTro;
-            detail.Anh=user.Anh;
+            detail.Anh = user.Anh;
             detail.Name = user.Name;
             detail.UserId = phongTro.IdUser;
 
@@ -73,7 +73,7 @@ namespace TienIchSinhVien.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            
+
             return View();
         }
 
@@ -194,6 +194,28 @@ namespace TienIchSinhVien.Controllers
             }
             base.Dispose(disposing);
         }
-        
+        public void Yeuthich(string namepost, int id)
+        {
+
+            YeuThich model = new YeuThich();
+            model.UserId = User.Identity.GetUserId();
+
+            if (db.YeuThich.Where(p => p.UserId == model.UserId && p.PostId == id).Count() == 0)
+            {
+                model.NamePost = namepost;
+                model.PostId = id;
+                db.YeuThich.Add(model);
+                db.SaveChanges();
+
+
+            }
+            else
+            {
+                YeuThich a = (YeuThich)db.YeuThich.Where(p => p.UserId == model.UserId && p.PostId == id);
+                db.YeuThich.Remove(a);
+                return;
+
+            }
+        }
     }
 }
