@@ -111,6 +111,7 @@ namespace TienIchSinhVien.Controllers
 
             return View(phongTro);
         }
+
         public ActionResult Edit(int id)
         {
             if (id == null)
@@ -130,10 +131,20 @@ namespace TienIchSinhVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdPhongTro,IdUser,TieuDe,AnhMinhHoa,Gia,DiaChi,NgayDang,DienTich,MoTa,TrangThai")] PhongTro phongTro)
+        [Authorize]
+        public ActionResult Edit([Bind(Include = "IdPhongTro,TieuDe,Gia,DiaChi,DienTich,MoTa")] PhongTro phongTro, HttpPostedFileBase anh)
         {
             if (ModelState.IsValid)
             {
+
+                if (anh != null && anh.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(anh.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                    anh.SaveAs(path);
+
+                    phongTro.AnhMinhHoa = "/Content/Images/" + fileName;
+                }
                 DateTime now = DateTime.Now;
 
                 phongTro.NgayDang = now;
@@ -166,6 +177,7 @@ namespace TienIchSinhVien.Controllers
         // POST: PhongTro/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             PhongTro phongTro = db.PhongTro.Find(id);
@@ -182,23 +194,6 @@ namespace TienIchSinhVien.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult detaiprofile(string id)
-        {
-
-            
-            var user = UserManager.FindById(id);
-            var model = new ProfileViewModel
-            {
-                UserName = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                Name = user.Name,
-                Anh = user.Anh,
-
-            };
-
-
-            return View(model);
-        }
+        
     }
 }

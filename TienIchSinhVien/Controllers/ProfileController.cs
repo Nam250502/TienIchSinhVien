@@ -11,6 +11,9 @@ using System.Drawing.Printing;
 using System.Web.UI;
 using System.Linq;
 using System.Web.Helpers;
+using System;
+using System.IO;
+using System.Collections.Generic;
 
 namespace TienIchSinhVien.Controllers
 {
@@ -87,18 +90,26 @@ namespace TienIchSinhVien.Controllers
             }
             return View(model);
         }
-        public async Task<ActionResult> Edit(ProfileViewModel model)
+        public async Task<ActionResult> Edit([Bind(Include = "Name,Email,PhoneNumber")] ProfileViewModel model, HttpPostedFileBase anhavt)
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user != null)
             {
+                if (anhavt != null && anhavt.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(anhavt.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                    anhavt.SaveAs(path);
+
+                    user.Anh = "/Content/Images/" + fileName;
+                }
                 // Cập nhật các thông tin mới của người dùng
                 user.Email = model.Email;
                 user.PhoneNumber = model.PhoneNumber;
 
                 user.Name =model.Name;
-                user.Anh = model.Anh;
+                
 
                 var result = await UserManager.UpdateAsync(user);
 
@@ -115,6 +126,7 @@ namespace TienIchSinhVien.Controllers
 
             return RedirectToAction("Index");
         }
+        // lấy danh sách bài viết đã đăng của mình
         public ActionResult PTDaDang()
         {
             var userId = User.Identity.GetUserId();
@@ -136,5 +148,65 @@ namespace TienIchSinhVien.Controllers
 
             return View(VLdadang);
         }
+        public ActionResult detaiprofile(string id)
+        {
+         
+
+            var user = UserManager.FindById(id);
+            var model = new ProfileViewModel
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Name = user.Name,
+                Anh = user.Anh,
+                UserId = user.Id,
+                
+
+            };
+            loadDanhGia(id);
+            return View(model);
+        }
+
+        public ActionResult loadDanhGia(string id)
+        {
+            ViewBag.loaduser = UserManager.FindById(id);
+            List<DanhGiaUser> model = db.DanhGiaUser.Where(p=>p.UserId2 == id).ToList();
+            
+            return View(model);
+            
+        }
+
+   
+        public void DanhGia(string DanhGia, string UserId2)
+        {
+
+            
+            DanhGiaUser model = new DanhGiaUser();
+            
+            model.UserId1 = User.Identity.GetUserId();
+            var a = UserManager.FindById(model.UserId1);
+            if(db.DanhGiaUser.Where(p=>p.UserId1==a.Id && p.UserId2 == UserId2).Count() == 0)
+            {
+                model.Anh = a.Anh;
+                model.Name = a.Name;
+                model.UserId2 = UserId2;
+                model.DanhGia = DanhGia;
+
+                db.DanhGiaUser.Add(model);
+                db.SaveChanges();
+
+            }
+            else
+            {
+                ViewBag.eror = "da danh gia";
+            }
+            return ;
+        
+        }
+       
+
+
+
     }
 }

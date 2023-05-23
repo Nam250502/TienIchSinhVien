@@ -70,6 +70,9 @@
     <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -198,6 +201,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DanhGiaUser.cs" />
     <Compile Include="Models\Detailviewmodel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoaiHang.cs" />
@@ -207,6 +211,7 @@
     <Compile Include="Models\RaoVat.cs" />
     <Compile Include="Models\TienIchSinhVienDb.cs" />
     <Compile Include="Models\ViecLam.cs" />
+    <Compile Include="Models\YeuThich.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -343,12 +348,12 @@
     <Content Include="Views\RaoVat\Edit.cshtml" />
     <Content Include="Views\RaoVat\Index.cshtml" />
     <Content Include="Views\Profile\RaoVat.cshtml" />
-    <Content Include="Views\PhongTro\detaiprofile.cshtml" />
-    <Content Include="Views\Profile\GetUserInfo.cshtml" />
+    <Content Include="Views\Profile\detaiprofile.cshtml" />
+    <Content Include="Views\Profile\loadDanhGia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Views\YeuThich\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

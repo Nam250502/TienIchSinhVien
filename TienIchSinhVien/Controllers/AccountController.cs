@@ -87,6 +87,7 @@ namespace TienIchSinhVien.Controllers
             }
 
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            ViewBag.userlogin = user;
 
             switch (result)
             {

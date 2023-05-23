@@ -23,6 +23,8 @@ namespace TienIchSinhVien.Models
         public string PhoneNumber { get; set; }
      
         public string Name { get; set; }
+        [StringLength(255)]
         public string Anh { get; set; }
+        public string UserId { get; set; }
     }
 }

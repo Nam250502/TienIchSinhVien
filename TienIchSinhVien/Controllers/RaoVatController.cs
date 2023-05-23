@@ -44,16 +44,7 @@ namespace TienIchSinhVien.Controllers
         }
         public ActionResult Details(int? id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //RaoVat raoVat = db.RaoVat.Find(id);
-            //if (raoVat == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(raoVat);
+      
 
             if (id == null)
             {
@@ -140,10 +131,19 @@ namespace TienIchSinhVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdBaiRao,IdUser,TieuDe,AnhMinhHoa,Gia,DiaChi,NgayDang,MoTa,TrangThai,PhoneNumber,LoaiHang")] RaoVat raoVat)
+        [Authorize]
+        public ActionResult Edit([Bind(Include = "IdBaiRao,TieuDe,AnhMinhHoa,Gia,DiaChi,NgayDang,MoTa,TrangThai,PhoneNumber,LoaiHang")] RaoVat raoVat, HttpPostedFileBase anh)
         {
             if (ModelState.IsValid)
             {
+                if (anh != null && anh.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(anh.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                    anh.SaveAs(path);
+
+                    raoVat.AnhMinhHoa = "/Content/Images/" + fileName;
+                }
                 DateTime now = DateTime.Now;
 
                 raoVat.NgayDang = now;
@@ -178,6 +178,7 @@ namespace TienIchSinhVien.Controllers
         // POST: RaoVat/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             RaoVat raoVat = db.RaoVat.Find(id);

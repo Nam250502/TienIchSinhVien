@@ -16,6 +16,8 @@ namespace TienIchSinhVien.Models
         public virtual DbSet<PhongTro> PhongTro { get; set; }
         public virtual DbSet<RaoVat> RaoVat { get; set; }
         public virtual DbSet<ViecLam> ViecLam { get; set; }
+        public virtual DbSet<DanhGiaUser> DanhGiaUser { get; set; }
+        public virtual DbSet<YeuThich> YeuThich { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -89,7 +89,7 @@
                         }
                     <div class="col-md-2">
                         <p></p>
-                        <button type="button" class="btn btn-outline-primary btn-block mb-2" onclick="location.href='@Url.Action("Edit", "RaoVatAD", new { id=item.IdBaiRao })'">Edit</button>
+                        <button type="button" class="btn btn-outline-primary btn-block mb-2" onclick="location.href='@Url.Action("Edit", "RaoVat", new { id=item.IdBaiRao })'">Edit</button>
 
                         @using (Html.BeginForm("Delete", "RaoVat", new { id = item.IdBaiRao }, FormMethod.Post))
                         {

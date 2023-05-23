@@ -32,6 +32,7 @@ namespace TienIchSinhVien.Controllers
             {
                 _userManager = value;
             }
+            
         }
 
         // GET: ViecLam
@@ -68,6 +69,7 @@ namespace TienIchSinhVien.Controllers
         }
 
         // GET: ViecLam/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -108,6 +110,7 @@ namespace TienIchSinhVien.Controllers
         }
 
         // GET: ViecLam/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             if (id == null)
@@ -127,10 +130,19 @@ namespace TienIchSinhVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdViecLam,IdUser,TieuDe,AnhMinhHoa,Luong,DiaChi,NgayDang,ViTriUngTuyen,MoTa,TrangThai")] ViecLam viecLam)
+        [Authorize]
+        public ActionResult Edit([Bind(Include = "IdViecLam,TieuDe,AnhMinhHoa,Luong,DiaChi,NgayDang,ViTriUngTuyen,MoTa,TrangThai")] ViecLam viecLam, HttpPostedFileBase anh)
         {
             if (ModelState.IsValid)
             {
+                if (anh != null && anh.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(anh.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                    anh.SaveAs(path);
+
+                    viecLam.AnhMinhHoa = "/Content/Images/" + fileName;
+                }
                 viecLam.IdUser = User.Identity.GetUserId();
                 DateTime now = DateTime.Now;
                 viecLam.NgayDang = now;
@@ -146,6 +158,7 @@ namespace TienIchSinhVien.Controllers
         }
 
         //GET: ViecLam/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             if (id == null)
@@ -163,6 +176,7 @@ namespace TienIchSinhVien.Controllers
         // POST: ViecLam/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             ViecLam viecLam = db.ViecLam.Find(id);

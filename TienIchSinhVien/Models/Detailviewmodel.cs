@@ -29,4 +29,11 @@ namespace TienIchSinhVien.Models
         public string Anh { get; set; }
         public string UserId { get; set; }
     }
-}
+    public  class loadDanhGia
+    {
+        public DanhGiaUser danhGiaUser { get; set; }
+        public ProfileViewModel ProfileViewModel { get; set; }
+    }
+   
+   
+}  
