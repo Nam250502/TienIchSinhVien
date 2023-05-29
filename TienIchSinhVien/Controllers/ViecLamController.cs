@@ -42,7 +42,16 @@ namespace TienIchSinhVien.Controllers
             if (page == null) page = 1;
             int pageSize = 12;
             var viecLam = db.ViecLam;
-            return View(viecLam.Where(p => p.TrangThai == 1).ToList().ToPagedList(page.Value, pageSize));
+            var upvieclam = viecLam.Where(p => p.TrangThai == 1).ToList();
+            var loginuser = User.Identity.GetUserId();
+            foreach (ViecLam i in upvieclam)
+            {
+                YeuThich yeuThich = db.YeuThich.FirstOrDefault(p => p.UserId == loginuser && p.PostId == i.IdViecLam && p.NamePost == "vieclam");
+                if (yeuThich != null)
+                    i.isShowYeuThich = true;
+            }
+            return View(upvieclam.ToPagedList(page.Value, pageSize));
+           
         }
 
         // GET: ViecLam/Details/5
@@ -159,7 +168,7 @@ namespace TienIchSinhVien.Controllers
 
         //GET: ViecLam/Delete/5
         [Authorize]
-        public ActionResult Delete(int id)
+        public ActionResult HidenPost(int id)
         {
             if (id == null)
             {
@@ -174,17 +183,27 @@ namespace TienIchSinhVien.Controllers
         }
 
         // POST: ViecLam/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("HidenPost")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult HidenPostConfirmed(int id)
         {
             ViecLam viecLam = db.ViecLam.Find(id);
-            db.ViecLam.Remove(viecLam);
+            if (viecLam.TrangThai == 3)
+            {
+                viecLam.TrangThai = 0;
+            }
+            else
+            {
+                viecLam.TrangThai = 3;
+            }
+           
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
+
+      
         protected override void Dispose(bool disposing)
         {
             if (disposing)

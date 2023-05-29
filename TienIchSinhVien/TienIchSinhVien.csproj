@@ -189,7 +189,9 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\PhongTroADController.cs" />
     <Compile Include="Areas\Admin\Controllers\RaoVatADController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserADController.cs" />
     <Compile Include="Areas\Admin\Controllers\ViecLamsController.cs" />
+    <Compile Include="Areas\Admin\model\UserAD.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -197,6 +199,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RaoVatController.cs" />
     <Compile Include="Controllers\ViecLamController.cs" />
+    <Compile Include="Controllers\YeuThichController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -282,6 +285,7 @@
     <Content Include="Areas\Admin\Views\RaoVatAD\Details.cshtml" />
     <Content Include="Areas\Admin\Views\RaoVatAD\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\RaoVatAD\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAD\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\JavaScriptAD.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -339,7 +343,6 @@
     <Content Include="Views\ViecLam\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\PTDaDang.cshtml" />
-    <Content Include="Views\PhongTro\Delete.cshtml" />
     <Content Include="Views\ViecLam\Delete.cshtml" />
     <Content Include="Views\Profile\VLDaDang.cshtml" />
     <Content Include="Views\RaoVat\Create.cshtml" />
@@ -350,10 +353,13 @@
     <Content Include="Views\Profile\RaoVat.cshtml" />
     <Content Include="Views\Profile\detaiprofile.cshtml" />
     <Content Include="Views\Profile\loadDanhGia.cshtml" />
+    <Content Include="Views\YeuThich\yeuthichphong.cshtml" />
+    <Content Include="Views\YeuThich\yeuthichvieclam.cshtml" />
+    <Content Include="Views\YeuThich\yeuthichraovat.cshtml" />
+    <Content Include="Views\YeuThich\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\YeuThich\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

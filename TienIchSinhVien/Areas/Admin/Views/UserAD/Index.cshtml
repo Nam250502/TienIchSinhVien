@@ -1,0 +1,31 @@
+﻿@model List<TienIchSinhVien.Areas.Admin.model.UserAD>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAD.cshtml";
+}
+
+
+<table>
+    <thead>
+        <tr>
+            <th>User Id</th>
+            <th>Username</th>
+            <th>Email</th>
+            <!-- Thêm các cột cho các thuộc tính khác của UserModel -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <!-- Thêm các cột cho các thuộc tính khác của UserModel -->
+            </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -48,6 +48,7 @@ namespace TienIchSinhVien.Controllers
         // GET: Profile
         public ActionResult Index()
         {
+            
 
             var userId = User.Identity.GetUserId();
             var user = UserManager.FindById(userId);

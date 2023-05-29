@@ -40,7 +40,16 @@ namespace TienIchSinhVien.Controllers
             if (page == null) page = 1;
             int pageSize = 12;
             var raoVat = db.RaoVat;
-            return View(raoVat.Where(p => p.TrangThai == 1).ToList().ToPagedList(page.Value, pageSize));
+            var upraovat = raoVat.Where(p => p.TrangThai == 1).ToList();
+            var loginuser = User.Identity.GetUserId();
+            foreach (RaoVat i in upraovat)
+            {
+                YeuThich yeuThich = db.YeuThich.FirstOrDefault(p => p.UserId == loginuser && p.PostId == i.IdBaiRao && p.NamePost == "raovat");
+                if (yeuThich != null)
+                    i.isShowYeuThich = true;
+            }
+            return View(upraovat.ToPagedList(page.Value, pageSize));
+           // return View(raoVat.Where(p => p.TrangThai == 1).ToList().ToPagedList(page.Value, pageSize));
         }
         public ActionResult Details(int? id)
         {
@@ -161,7 +170,7 @@ namespace TienIchSinhVien.Controllers
         }
 
         // GET: RaoVat/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult HidenPost(int? id)
         {
             if (id == null)
             {
@@ -176,16 +185,25 @@ namespace TienIchSinhVien.Controllers
         }
 
         // POST: RaoVat/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("HidenPost")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult HidenPostConfirmed(int id)
         {
             RaoVat raoVat = db.RaoVat.Find(id);
-            db.RaoVat.Remove(raoVat);
+            if (raoVat.TrangThai == 3)
+            {
+                raoVat.TrangThai = 0;
+            }
+            else
+            {
+                raoVat.TrangThai = 3;
+            }
+           
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {

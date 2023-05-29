@@ -37,6 +37,7 @@ namespace TienIchSinhVien.Models
         public string PhoneNumber { get; set; }
 
         public int? LoaiHang { get; set; }
+        public bool isShowYeuThich = false;
         public List<LoaiHang> loaiHangs = new List<LoaiHang>();
 
         public virtual LoaiHang LoaiHang1 { get; set; }

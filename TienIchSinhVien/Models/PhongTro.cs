@@ -38,5 +38,6 @@ namespace TienIchSinhVien.Models
         public int? TrangThai { get; set; }
 
         public string PhoneNumber { get; set; }
+        public bool isShowYeuThich = false;
     }
 }

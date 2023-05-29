@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Bài Viết Yêu Thích</h3>
+
+<h5>Phòng Trọ</h5>
+@Html.Action("yeuthichphong","YeuThich")
+<h5>Rao Vặt</h5>
+@Html.Action("yeuthichraovat","YeuThich")
+<h5>Việc Làm</h5>
+@Html.Action("yeuthichvieclam","YeuThich")

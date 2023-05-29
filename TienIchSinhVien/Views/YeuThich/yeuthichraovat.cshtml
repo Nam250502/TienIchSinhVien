@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TienIchSinhVien.Models.RaoVat>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>yeuthichraovat</title>
+</head>
+<body>
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <!-- Sản phẩm 1 -->
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="@item.AnhMinhHoa" alt="Product Image" class="img-fluid" width="150px" height="50px">
+                    </div>
+                    <div class="col-md-5">
+                        <h5>@item.TieuDe</h5>
+                        <p>@item.Gia đ</p>
+                        <p>@item.NgayDang</p>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <br />
+                        <br />
+                        <a href="@Url.Action("Details", "Raovat", new {id=item.IdBaiRao})" class="btn btn-outline-primary btn-block mb-2">Chi Tiết</a>
+
+
+                    </div>
+                </div>
+            </li>
+        }
+
+    </ul>
+</body>
+</html>

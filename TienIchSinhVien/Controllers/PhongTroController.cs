@@ -42,7 +42,15 @@ namespace TienIchSinhVien.Controllers
             if (page == null) page = 1;
             int pageSize = 12;
             var phongTro = db.PhongTro;
-            return View(phongTro.Where(p => p.TrangThai == 1).ToList().ToPagedList(page.Value, pageSize));
+            var upphongtro = phongTro.Where(p => p.TrangThai == 1).ToList();
+            var loginuser = User.Identity.GetUserId();
+            foreach(PhongTro i in upphongtro)
+            {
+                YeuThich yeuThich = db.YeuThich.FirstOrDefault(p => p.UserId == loginuser && p.PostId == i.IdPhongTro && p.NamePost == "phongtro");
+                if (yeuThich != null) 
+                i.isShowYeuThich = true;
+            }
+            return View(upphongtro.ToPagedList(page.Value, pageSize));
         }
 
         // GET: PhongTro/Details/5
@@ -160,7 +168,7 @@ namespace TienIchSinhVien.Controllers
         }
 
         //GET: PhongTro/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult HidenPost(int id)
         {
             if (id == null)
             {
@@ -175,13 +183,22 @@ namespace TienIchSinhVien.Controllers
         }
 
         // POST: PhongTro/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("HidenPost")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult HidenPostConfirmed(int id)
         {
             PhongTro phongTro = db.PhongTro.Find(id);
-            db.PhongTro.Remove(phongTro);
+            if (phongTro.TrangThai == 3)
+            {
+                phongTro.TrangThai = 0;
+
+            }
+            else
+            {
+                phongTro.TrangThai = 3;
+            }
+           
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -194,28 +211,6 @@ namespace TienIchSinhVien.Controllers
             }
             base.Dispose(disposing);
         }
-        public void Yeuthich(string namepost, int id)
-        {
-
-            YeuThich model = new YeuThich();
-            model.UserId = User.Identity.GetUserId();
-
-            if (db.YeuThich.Where(p => p.UserId == model.UserId && p.PostId == id).Count() == 0)
-            {
-                model.NamePost = namepost;
-                model.PostId = id;
-                db.YeuThich.Add(model);
-                db.SaveChanges();
-
-
-            }
-            else
-            {
-                YeuThich a = (YeuThich)db.YeuThich.Where(p => p.UserId == model.UserId && p.PostId == id);
-                db.YeuThich.Remove(a);
-                return;
-
-            }
-        }
+       
     }
 }

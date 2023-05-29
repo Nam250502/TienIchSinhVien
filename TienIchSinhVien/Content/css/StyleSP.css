@@ -31,3 +31,18 @@ body {
         text-decoration: none;
         color: #555;
     }
+
+
+
+
+.visible-xs {
+    display: none !important;
+}
+
+.favorite-heart {
+    color: pink;
+}
+
+.non-favorite-heart {
+    color: white;
+}
